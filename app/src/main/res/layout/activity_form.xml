@@ -42,17 +42,17 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/layout_present"
+        android:id="@+id/layout_gift"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Present"
+        android:hint="Gift"
         app:layout_constraintEnd_toEndOf="@+id/layout_to_whom"
         app:layout_constraintStart_toStartOf="@+id/layout_to_whom"
         app:layout_constraintTop_toBottomOf="@+id/layout_to_whom">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/input_present"
+            android:id="@+id/input_gift"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </android.support.design.widget.TextInputLayout>
@@ -63,9 +63,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:hint="Notes"
-        app:layout_constraintEnd_toEndOf="@+id/layout_present"
-        app:layout_constraintStart_toStartOf="@+id/layout_present"
-        app:layout_constraintTop_toBottomOf="@+id/layout_present">
+        app:layout_constraintEnd_toEndOf="@+id/layout_gift"
+        app:layout_constraintStart_toStartOf="@+id/layout_gift"
+        app:layout_constraintTop_toBottomOf="@+id/layout_gift">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/input_notes"

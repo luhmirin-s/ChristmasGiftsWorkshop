@@ -24,7 +24,7 @@ class GiftListActivity : AppCompatActivity() {
         list_recycler.adapter = adapter
 
         ViewModelProviders.of(this).get(GiftListViewModel::class.java)
-            .getAllPresents()
+            .getAllGifts()
             .observe(this, Observer { gifts ->
                 gifts?.let { adapter.giftList = gifts }
             })

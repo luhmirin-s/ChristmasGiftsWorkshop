@@ -11,6 +11,7 @@ import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.Update
+import android.os.AsyncTask
 
 
 @Database(entities = [Gift::class], version = 1, exportSchema = false)
@@ -42,4 +43,22 @@ interface GiftDao {
 
     @Delete
     fun deleteGift(gift: Gift)
+}
+
+class SaveAsync : AsyncTask<Gift, Unit, Unit>() {
+    override fun doInBackground(vararg params: Gift) {
+        MyApp.GIFTS.saveGift(params[0])
+    }
+}
+
+class UpdateAsync : AsyncTask<Gift, Unit, Unit>() {
+    override fun doInBackground(vararg params: Gift) {
+        MyApp.GIFTS.updateGift(params[0])
+    }
+}
+
+class DeleteAsync : AsyncTask<Gift, Unit, Unit>() {
+    override fun doInBackground(vararg params: Gift) {
+        MyApp.GIFTS.deleteGift(params[0])
+    }
 }

@@ -36,12 +36,12 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/item_present"
+                android:id="@+id/item_gift"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:fontFamily="sans-serif"
-                android:text="Present"
+                android:text="Gift"
                 android:textColor="@color/primary_text"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"

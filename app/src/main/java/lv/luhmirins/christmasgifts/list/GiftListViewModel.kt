@@ -9,7 +9,7 @@ class GiftListViewModel : ViewModel() {
 
     private var data: LiveData<List<Gift>>? = null
 
-    fun getAllPresents(): LiveData<List<Gift>> {
+    fun getAllGifts(): LiveData<List<Gift>> {
         if (data == null) {
             data = MyApp.GIFTS.getAllGifts()
         }

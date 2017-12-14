@@ -34,7 +34,7 @@ class GiftsListAdapter(
 class GiftViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(item: Gift, onClick: (Long) -> Unit) {
         itemView.item_to_whom.text = "To ${item.toWhom}"
-        itemView.item_present.text = item.giftName
+        itemView.item_gift.text = item.giftName
         itemView.item_card.setOnClickListener { onClick(item.uid) }
     }
 }
