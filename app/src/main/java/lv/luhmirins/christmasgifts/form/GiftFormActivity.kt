@@ -1,17 +1,10 @@
 package lv.luhmirins.christmasgifts.form
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_form.*
-import lv.luhmirins.christmasgifts.DeleteAsync
 import lv.luhmirins.christmasgifts.Gift
-import lv.luhmirins.christmasgifts.MyApp
 import lv.luhmirins.christmasgifts.R
-import lv.luhmirins.christmasgifts.SaveAsync
-import lv.luhmirins.christmasgifts.UpdateAsync
 
 class GiftFormActivity : AppCompatActivity() {
 
@@ -22,58 +15,63 @@ class GiftFormActivity : AppCompatActivity() {
         setContentView(R.layout.activity_form)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val currentGiftId = intent?.getLongExtra("gift_id", 0) ?: 0
-        MyApp.GIFTS.getGift(currentGiftId).observe(this, Observer { nullableGift ->
-            currentGift = nullableGift
+        /*
+         TODO connect your layout with some actions:
+          1) retrieve id of current gift from `intent`
+          2) fetch gift from `MyApp.GIFTS` by observing changes
+          3) cache data in `currentGift` for future use
+          4) if data is not empty(null) write existing values to inputs
+          5) add 'save' button click listener to either update or save
+                gift to database and finish activity
 
-            nullableGift?.let { notNullGift ->
-                input_to_whom.setText(notNullGift.toWhom)
-                input_gift.setText(notNullGift.giftName)
-                input_notes.setText(notNullGift.notes)
-            }
-        })
-
-        fab_save.setOnClickListener {
-            currentGift
-                ?.let { updateGift(it) }
-                ?: saveGift()
-            finish()
-        }
+          [Cheat 2]
+         */
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_form, menu)
-        return true
+    /*
+     TODO write a function that:
+      1) takes text from inputs
+      2) creates new Gift object
+      3) executes `SaveAsync` to save new gift to database
+
+      [Cheat 3]
+    */
+    private fun saveGift() {
     }
 
+    /*
+    TODO write a function that:
+     1) takes text from inputs
+     2) creates new Gift object with same uid
+     3) executes `UpdateAsync` to save gift changes to database
+
+     [Cheat 4]
+   */
+    private fun updateGift(gift: Gift) {
+    }
+
+
+    /*
+     TODO implement delete button
+      1) override `onPrepareOptionsMenu(Menu)` method of `AppCompatActivity`
+      2) using `menuInflates` inflate `R.menu.menu_form`
+      3) don`t forget to add `return true` so that menu is displayed
+
+      [Cheat 5]
+    */
+
+    /*
+     TODO implement delete button click handling
+      1) if `currentGift` is not null execute `DeleteAsync`
+      2) finish current activity
+      3) don't forget to `return true` to show that we handled the click
+
+      [Cheat 5]
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_item_delete) {
-            currentGift?.let { gift ->
-                DeleteAsync().execute(gift)
-            }
-            finish()
-            return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun updateGift(gift: Gift) {
-        val newGift = Gift(
-            uid = gift.uid,
-            toWhom = input_to_whom.text.toString(),
-            giftName = input_gift.text.toString(),
-            notes = input_notes.text.toString()
-        )
-        UpdateAsync().execute(newGift)
-    }
-
-    private fun saveGift() {
-        val newGift = Gift(
-            toWhom = input_to_whom.text.toString(),
-            giftName = input_gift.text.toString(),
-            notes = input_notes.text.toString()
-        )
-        SaveAsync().execute(newGift)
     }
 
 }

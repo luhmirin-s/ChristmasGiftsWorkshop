@@ -2,13 +2,11 @@ package lv.luhmirins.christmasgifts.list
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_list.*
 import lv.luhmirins.christmasgifts.R
-import lv.luhmirins.christmasgifts.form.GiftFormActivity
 
 class GiftListActivity : AppCompatActivity() {
 
@@ -40,9 +38,14 @@ class GiftListActivity : AppCompatActivity() {
         }
     }
 
+    /*
+     TODO open form activity
+      1) create an `Intent` for `GiftFormActivity`
+      2) put id of clicked item into extras (if it not null)
+      3) call `startActivity`
+
+      [Cheat 6]
+     */
     private fun openFormActivity(giftId: Long?) {
-        val intent = Intent(this, GiftFormActivity::class.java)
-        giftId?.let { intent.putExtra("gift_id", it) }
-        startActivity(intent)
     }
 }
