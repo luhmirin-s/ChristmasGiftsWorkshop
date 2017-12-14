@@ -14,11 +14,19 @@ import android.arch.persistence.room.Update
 import android.os.AsyncTask
 
 
+/*
+ * This is the main SQLite database access class. In this app we use Room framework for database.
+ * More info: https://developer.android.com/topic/libraries/architecture/room.html
+ */
 @Database(entities = [Gift::class], version = 1, exportSchema = false)
 abstract class AppDb : RoomDatabase() {
     abstract fun giftDao(): GiftDao
+
 }
 
+/*
+ * This class describes "gifts" table in our database.
+ */
 @Entity(tableName = "gifts")
 data class Gift(
     @ColumnInfo(name = "uid") @PrimaryKey(autoGenerate = true) var uid: Long = 0,
@@ -27,6 +35,11 @@ data class Gift(
     @ColumnInfo(name = "notes") var notes: String = ""
 )
 
+/*
+ * This interface describes what operation we can do with "gifts" database.
+ * Query annotations contain proper SQL queries.
+ * Insert, Update and Delete annotations are also just shortcuts for corresponding SQL queries.
+ */
 @Dao
 interface GiftDao {
     @Query("SELECT * FROM gifts")
@@ -44,6 +57,14 @@ interface GiftDao {
     @Delete
     fun deleteGift(gift: Gift)
 }
+
+/*
+ * Since database operations can take a long time to complete those operations
+ * MUST be do in background so it does not freeze applications UI.
+ * For this reason we are using very simple AsyncTasks.
+ *
+ * https://developer.android.com/reference/android/os/AsyncTask.html
+ */
 
 class SaveAsync : AsyncTask<Gift, Unit, Unit>() {
     override fun doInBackground(vararg params: Gift) {

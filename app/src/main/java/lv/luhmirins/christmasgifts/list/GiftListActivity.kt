@@ -16,13 +16,19 @@ class GiftListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        // Creating adapter with item click callback for recycler view to use.
         val adapter = GiftsListAdapter(this) { giftId ->
             openFormActivity(giftId)
         }
 
+        // Setting recycler view to show items as list
         list_recycler.layoutManager = LinearLayoutManager(this)
         list_recycler.adapter = adapter
 
+        // Fetch all gifts from database and update data in the adapter
+        // `getAllGifts()` returns LiveData object that observes specific data in
+        // database and calls Observer if anything changes. This way our list is
+        // always up to date, even if we change items in form screens.
         ViewModelProviders.of(this).get(GiftListViewModel::class.java)
             .getAllGifts()
             .observe(this, Observer { gifts ->

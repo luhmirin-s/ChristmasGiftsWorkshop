@@ -5,6 +5,9 @@ import android.arch.lifecycle.ViewModel
 import lv.luhmirins.christmasgifts.Gift
 import lv.luhmirins.christmasgifts.MyApp
 
+/*
+ * https://developer.android.com/topic/libraries/architecture/viewmodel.html
+ */
 class GiftListViewModel : ViewModel() {
 
     private var data: LiveData<List<Gift>>? = null
